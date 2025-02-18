@@ -1,0 +1,41 @@
+/* src/assets/css/global.css */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .map-container {
+    position: relative;
+  }
+<<<<<<< HEAD
+
+  .scroll-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .scroll-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .scroll-gradient {
+    width: 60px;
+    height: 4px;
+    border-radius: 999px;
+    margin-top: 8px;
+  }  
+
+=======
+>>>>>>> 84968589330ef8885b5c1d240413e5c5c2b975c8
+  

@@ -1,0 +1,75 @@
+<<<<<<< HEAD
+# Dependências
+node_modules/
+.pnpm/
+.yarn/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build
+dist/
+out/
+
+# Cache
+.cache/
+.temp/
+
+# Configurações locais
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDE/Editor
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testes
+coverage/
+.nyc_output/
+=======
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Ambiente
+.env
+
+# Diretórios de build
+dist/
+build/
+
+# Arquivos de log
+logs/
+*.log
+
+# Sistema de arquivos
+.DS_Store
+Thumbs.db
+
+# IDEs e editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+>>>>>>> 84968589330ef8885b5c1d240413e5c5c2b975c8
+
+# Outros
+*.tmp
+*.bak

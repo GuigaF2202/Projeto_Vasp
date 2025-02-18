@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  margin: 0 auto; /* Centraliza a logo */
+}
+
+.map-container {
+  width: 100%;
+  height: 600px;
+  margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    height: 400px; /* Ajusta a altura em telas menores */
+  }
+}
+
+.airplane-marker {
+  background: none;
+  border: none;
+}
+
+.airplane-marker svg {
+  fill: #0066ff;
+}
+
+.flight-info {
+  padding: 10px;
+  transition: background-color 0.3s; /* Suaviza a transição */
+}
+
+.flight-info:hover {
+  background-color: rgba(0, 102, 255, 0.1); /* Efeito de hover */
+}
+
+.flight-info h3 {
+  margin: 0 0 10px 0;
+}
+
+.flight-info p {
+  margin: 5px 0;
+}
+
+.airplane-emoji-icon {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.airplane-emoji-icon div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+.metar-info {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.metar-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.metar-info p {
+  margin: 5px 0;
+}
+
+.metar-info strong {
+  font-weight: bold;
+}
+
+/* Estilo para o popup */
+.flight-popup {
+  background: rgba(17, 24, 39, 0.95);
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 200px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.leaflet-popup-content-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(17, 24, 39, 0.95) !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+}
+
+.leaflet-container {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.airplane-icon {
+  background: none !important;
+  border: none;
+}
+
+.airplane-icon img {
+  transition: transform 0.3s ease;
+  filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(206deg) brightness(104%) contrast(97%);
+}
+
+.airplane-icon:hover img {
+  transform: scale(1.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Para garantir que as seções começem no lugar certo, considerando o header fixo */
+section {
+  scroll-margin-top: 4rem;
+}

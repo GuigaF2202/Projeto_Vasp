@@ -1,0 +1,42 @@
+.metar-section {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+  }
+  
+  .metar-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .metar-info {
+    font-size: 14px;
+    color: #FFFFFF;
+    margin-bottom: 5px;
+  }
+  
+  .metar-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .dark-theme .metar-info {
+    color: #ffffff;
+  }
+  
+  .raw-metar {
+    font-size: 12px;
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    color: #FF5A1F;
+  }
+  
+  .dark-theme .raw-metar {
+    background: rgba(255, 255, 255, 0.1);
+  } 

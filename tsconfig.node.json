@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "CommonJS",
+    "target": "ES2022",
+    "outDir": "dist",
+    "rootDir": ".",
+    "strict": true
+  },
+  "include": ["vite.config.ts"]
+}

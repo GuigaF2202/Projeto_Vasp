@@ -1,0 +1,246 @@
+/* Sidebar Geral */
+.sidebar-glass {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 10px 0 0 10px;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+  z-index: 1001;
+  font-family: Arial, sans-serif;
+}
+
+/* Tema Claro */
+.sidebar-glass.light-theme {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+/* Tema Escuro */
+.sidebar-glass.dark-theme {
+  background: rgba(20, 20, 20, 0.95);
+  color: #f0f0f0;
+  border: 1px solid #444;
+}
+
+/* Header da Sidebar */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.header-image {
+  width: 90%;
+  height: 80%;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  align: center;
+}
+
+/* Botão Fechar */
+.close-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+  color: #FF5A1F;
+}
+
+/* Informações do Voo */
+.compact-flight-info {
+  margin-top: 10px;
+}
+
+.flight-callsign {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FF5A1F;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Grade de Informações */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background 0.3s;
+}
+
+.dark-theme .info-card {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.light-theme .info-card {
+  background: rgba(240, 240, 240, 0.8);
+  border-color: rgba(200, 200, 200, 0.5);
+}
+
+.info-label {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #FF5A1F;
+  font-weight: bold;
+}
+
+/* METAR Section */
+.metar-section {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.metar-title {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.metar-info {
+  font-size: 14px;
+  color: #000000;
+  margin-top: 5px;
+}
+
+.metar-card {
+  padding: 12px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  font-family: monospace;
+  color: #FF5A1F;
+  text-align: center;
+}
+
+.dark-theme .metar-card {
+  background: rgba(30, 30, 30, 0.6);
+}
+
+.light-theme .metar-card {
+  background: rgba(240, 240, 240, 0.9);
+  color: #222;
+}
+
+/* Sidebar Principal */
+.sidebar {
+  position: absolute;
+  top: 20px;  /* Ajuste conforme a necessidade */
+  left: 20px; /* Ajuste conforme a necessidade */
+  z-index: 9999;
+  max-width: 300px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Tema Escuro */
+.sidebar.dark {
+  background-color: #111827;
+  color: white;
+}
+
+/* Tema Claro */
+.sidebar.light {
+  background-color: white;
+  color: black;
+}
+
+/* Botão para Fechar a Sidebar */
+.sidebar .close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #FF5A1F;
+  cursor: pointer;
+  padding: 5px;
+  font-weight: bold;
+}
+
+/* Container para centralizar a imagem */
+.header-image-container {
+  display: flex;
+  justify-content: center;  /* Centraliza horizontalmente */
+  align-items: center;      /* Centraliza verticalmente */
+  width: 100%;
+  margin-bottom: 20px; /* Espaço entre a imagem e o conteúdo */
+}
+
+/* Estilo da imagem */
+.header-image {
+  width: auto;            /* Mantém a proporção da largura da imagem */
+  max-width: 250px;       /* Limita o tamanho máximo da largura */
+  height: auto;           /* Mantém a proporção da altura */
+  border-radius: 10px;    /* Bordas arredondadas */
+}
+
+/* Estilos dos Títulos e Informações do Voo */
+.flight-info {
+  font-family: 'Arial', sans-serif;
+}
+
+.flight-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #3B6CEB;  /* Cor de destaque */
+}
+
+.airport-info p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.airport-info strong {
+  color: #FF5A1F; /* Cor de destaque no tema */
+}
+
+.airport-info {
+  margin-top: 20px;
+}
+
+/* Animação de Abertura da Sidebar */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* Responsividade para dispositivos menores */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 200px;
+  }
+}
