@@ -115,7 +115,7 @@ const FlightsInProgress = () => {
           })}
         </div>
       )}
-    </div>
+    </div>  
   );
 };
 
