@@ -25,7 +25,7 @@ const FlightsInProgress = () => {
         const response = await fetch(process.env.REACT_APP_VAMSYS_FLIGHTS_URL, {
           method: 'POST',
           headers: {
-            Authorization: process.env.REACT_APP_VAMSYS_AUTH_TOKEN, // Usando variável de ambiente
+            Authorization: `Bearer ${process.env.REACT_APP_VAMSYS_AUTH_TOKEN}`, // Usando variável de ambiente
             },
             body: form,
           }
