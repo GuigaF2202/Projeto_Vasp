@@ -22,10 +22,11 @@ const FlightsInProgress = () => {
         const form = new FormData();
         form.append("airline_id", "323");
 
-        const response = await fetch(process.env.REACT_APP_VAMSYS_FLIGHTS_URL, {
+        const response = await fetch(
+          process.env.REACT_APP_VAMSYS_FLIGHTS_URL, {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_VAMSYS_AUTH_TOKEN}`, // Usando variável de ambiente
+            Authorization: `Bearer ${process.env.REACT_APP_VAMSYS_AUTH_TOKEN}`,
             },
             body: form,
           }
