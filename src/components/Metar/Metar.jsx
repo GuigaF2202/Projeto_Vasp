@@ -57,7 +57,7 @@ const Metar = ({ airportCode }) => {
               <strong>Condições: </strong> {metarData.flight_category || "N/A"}
             </span>
             <span>
-              <strong> Vento: </strong> {metarData.wind?.degrees || "N/A"}° /{" "}
+              <strong> Vento: </strong> {metarData.wind?.degrees || "N/A"}°/{""}
               {metarData.wind?.speed_kts || "N/A"} Kts
             </span>
             <span>
