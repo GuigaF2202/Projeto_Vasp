@@ -44,7 +44,7 @@ function Sidebar({ flightData, metarData, pilotUserName, onClose, mapTheme }) {
 
         <div className="info-grid">
           <InfoCard label="Piloto" value={pilotUserName} highlight />
-          <InfoCard label="Rede" value={flightData.network || "N/A"} />
+          <InfoCard label="Rede" value={flightData.network || "N/A"} />  
           <InfoCard label="Aeronave" value={flightData.aircraft} />
           <InfoCard label="Partida" value={flightData.departure} />
           <InfoCard label="Chegada" value={flightData.arrival} />
