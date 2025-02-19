@@ -128,7 +128,7 @@ function FlightMap() {
         body: form,
       };
 
-      const response = await fetch(process.env.REACT_APP_VAMSYS_PILOT_URL, options);
+      const response = await fetch('https://vamsys.io/api/token/v1/airline/pilot', options);
       const data = await response.json();
 
       if (response.ok && data?.data?.user_name) {
