@@ -36,66 +36,58 @@ function FlightMap() {
     [mapTheme]
   );
 
-  // Busca de voos
   const fetchFlights = useCallback(async () => {
-    try {
-      const form = new FormData();
-      form.append('airline_id', '323');
-      
-      const response = await fetch(process.env.REACT_APP_VAMSYS_FLIGHTS_URL, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_VAMSYS_AUTH_TOKEN}`,
-        },
-        body: form,
-      });
-  
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      const flightArray = Object.values(data?.data?.flights || {}).map((flight) => {
-        let title, description;
-        if (flight.pilot.rank.abbreviation) {
-          title = `${flight.user.name}, ${flight.pilot.rank.abbreviation} - ${flight.pilot.username}`;
-          description = `<p>${flight.departureAirport.identifiers} to ${flight.arrivalAirport.identifiers}</p>`;
-        } else {
-          title = `${flight.user.name} - ${flight.pilot.username}`;
-          description = `<p>${flight.departureAirport.identifiers} to ${flight.arrivalAirport.identifiers}</p>`;
-        }
+  try {
+    const form = new FormData();
+    form.append('airline_id', '323');
+    
+    const response = await fetch(process.env.REACT_APP_VAMSYS_FLIGHTS_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_VAMSYS_AUTH_TOKEN}`,
+      },
+      body: form,
+    });
 
-        return {
-          callsign: flight.booking.callsign,
-          flightNumber: flight.booking.flightNumber,
-          altitude: flight.progress.altitude,
-          speed: flight.progress.groundSpeed,
-          heading: flight.progress.magneticHeading,
-          latitude: parseFloat(flight.progress.latitude),
-          longitude: parseFloat(flight.progress.longitude),
-          departure: flight.departureAirport.icao,
-          arrival: flight.arrivalAirport.icao,
-          aircraft: flight.aircraft.type,
-          phase: flight.progress.currentPhase,
-          network: flight.booking.network,
-          distanceRemaining: flight.progress.distanceRemaining,
-          pilotUsername: flight.pilot?.username,
-          timestamp: new Date().getTime(), // Adiciona timestamp único
-          title, // Adiciona o título ao objeto de voo
-          description // Adiciona a descrição ao objeto de voo
-        };
-      });
-  
-      setFlights(flightArray);
-      setIsLoading(false);
-      setError(null);
-      setLastUpdate(new Date());
-    } catch (err) {
-      setError(err.message);
-      setIsLoading(false);
-      setFlights([]);
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
     }
-  }, []);
+
+    const data = await response.json();
+
+    // Verifique se os dados existem antes de processá-los
+    if (!data?.data?.flights) {
+      throw new Error('Dados de voos não encontrados');
+    }
+
+    const flightArray = Object.values(data.data.flights).map((flight) => ({
+      callsign: flight?.booking?.callsign || 'N/A',
+      flightNumber: flight?.booking?.flightNumber || 'N/A',
+      altitude: flight?.progress?.altitude || 0,
+      speed: flight?.progress?.groundSpeed || 0,
+      heading: flight?.progress?.magneticHeading || 0,
+      latitude: parseFloat(flight?.progress?.latitude) || 0,
+      longitude: parseFloat(flight?.progress?.longitude) || 0,
+      departure: flight?.departureAirport?.icao || 'N/A',
+      arrival: flight?.arrivalAirport?.icao || 'N/A',
+      aircraft: flight?.aircraft?.type || 'N/A',
+      phase: flight?.progress?.currentPhase || 'N/A',
+      network: flight?.booking?.network || 'N/A',
+      distanceRemaining: flight?.progress?.distanceRemaining || 0,
+      pilotUsername: flight?.pilot?.username || 'N/A',
+      timestamp: new Date().getTime(),
+    }));
+
+    setFlights(flightArray);
+    setIsLoading(false);
+    setError(null);
+    setLastUpdate(new Date());
+  } catch (err) {
+    setError(err.message);
+    setIsLoading(false);
+    setFlights([]);
+  }
+}, []);
 
   useEffect(() => {
     fetchFlights();
