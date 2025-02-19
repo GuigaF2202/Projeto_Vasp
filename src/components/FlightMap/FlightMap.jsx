@@ -37,57 +37,57 @@ function FlightMap() {
   );
 
   const fetchFlights = useCallback(async () => {
-  try {
-    const form = new FormData();
-    form.append('airline_id', '323');
-    
-    const response = await fetch(process.env.REACT_APP_VAMSYS_FLIGHTS_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_VAMSYS_AUTH_TOKEN}`,
-      },
-      body: form,
-    });
-
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.status}`);
+    try {
+      const form = new FormData();
+      form.append('airline_id', '323');
+      
+      const response = await fetch(process.env.REACT_APP_VAMSYS_FLIGHTS_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_VAMSYS_AUTH_TOKEN}`,
+        },
+        body: form,
+      });
+  
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+      }
+  
+      const data = await response.json();
+  
+      // Verifique se os dados existem antes de processá-los
+      if (!data?.data?.flights) {
+        throw new Error('Dados de voos não encontrados');
+      }
+  
+      const flightArray = Object.values(data.data.flights).map((flight) => ({
+        callsign: flight?.booking?.callsign || 'N/A',
+        flightNumber: flight?.booking?.flightNumber || 'N/A',
+        altitude: flight?.progress?.altitude || 0,
+        speed: flight?.progress?.groundSpeed || 0,
+        heading: flight?.progress?.magneticHeading || 0,
+        latitude: parseFloat(flight?.progress?.latitude) || 0,
+        longitude: parseFloat(flight?.progress?.longitude) || 0,
+        departure: flight?.departureAirport?.icao || 'N/A',
+        arrival: flight?.arrivalAirport?.icao || 'N/A',
+        aircraft: flight?.aircraft?.type || 'N/A',
+        phase: flight?.progress?.currentPhase || 'N/A',
+        network: flight?.booking?.network || 'N/A',
+        distanceRemaining: flight?.progress?.distanceRemaining || 0,
+        pilotUsername: flight?.pilot?.username || 'N/A',
+        timestamp: new Date().getTime(),
+      }));
+  
+      setFlights(flightArray);
+      setIsLoading(false);
+      setError(null);
+      setLastUpdate(new Date());
+    } catch (err) {
+      setError(err.message);
+      setIsLoading(false);
+      setFlights([]);
     }
-
-    const data = await response.json();
-
-    // Verifique se os dados existem antes de processá-los
-    if (!data?.data?.flights) {
-      throw new Error('Dados de voos não encontrados');
-    }
-
-    const flightArray = Object.values(data.data.flights).map((flight) => ({
-      callsign: flight?.booking?.callsign || 'N/A',
-      flightNumber: flight?.booking?.flightNumber || 'N/A',
-      altitude: flight?.progress?.altitude || 0,
-      speed: flight?.progress?.groundSpeed || 0,
-      heading: flight?.progress?.magneticHeading || 0,
-      latitude: parseFloat(flight?.progress?.latitude) || 0,
-      longitude: parseFloat(flight?.progress?.longitude) || 0,
-      departure: flight?.departureAirport?.icao || 'N/A',
-      arrival: flight?.arrivalAirport?.icao || 'N/A',
-      aircraft: flight?.aircraft?.type || 'N/A',
-      phase: flight?.progress?.currentPhase || 'N/A',
-      network: flight?.booking?.network || 'N/A',
-      distanceRemaining: flight?.progress?.distanceRemaining || 0,
-      pilotUsername: flight?.pilot?.username || 'N/A',
-      timestamp: new Date().getTime(),
-    }));
-
-    setFlights(flightArray);
-    setIsLoading(false);
-    setError(null);
-    setLastUpdate(new Date());
-  } catch (err) {
-    setError(err.message);
-    setIsLoading(false);
-    setFlights([]);
-  }
-}, []);
+  }, []);
 
   useEffect(() => {
     fetchFlights();
@@ -115,43 +115,46 @@ function FlightMap() {
     }
   }, []);
 
-  // Busca nome do piloto
-  const fetchPilotUserName = useCallback(async (username) => {
+  const fetchPilotUserName = async (username) => {
     try {
       const form = new FormData();
       form.append('username', username);
 
-      const response = await fetch(process.env.REACT_APP_VAMSYS_PILOT_URL, {
+      const options = {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_VAMSYS_AUTH_TOKEN}`,
         },
-      });
-      if (!response.ok) {
-        throw new Error(`Erro ao buscar piloto: ${response.status}`);
-      }
+        body: form,
+      };
 
+      const response = await fetch(process.env.REACT_APP_VAMSYS_PILOT_URL, options);
       const data = await response.json();
-      return data?.data?.user_name || null;
+
+      if (response.ok && data?.data?.user_name) {
+        return data.data.user_name;
+      } else {
+        console.error('Erro ao buscar user_name do piloto:', data);
+        return null;
+      }
     } catch (error) {
-      console.error('Erro ao buscar piloto:', error);
+      console.error('Erro ao buscar user_name do piloto:', error);
       return null;
     }
-  }, []);
+  };
 
-  // Manipulador de clique no marcador
-  const handleMarkerClick = useCallback(async (flight) => {
-    setSelectedFlight(prev => prev?.callsign === flight.callsign ? null : flight);
+  const handleMarkerClick = async (flight) => {
+    setSelectedFlight(flight);
     setShowSidebar(true);
 
-    const [metar, userName] = await Promise.all([
-      fetchMetarData(flight.departure),
-      flight.pilotUsername ? fetchPilotUserName(flight.pilotUsername) : null
-    ]);
-
+    const metar = await fetchMetarData(flight.departure);
     setMetarData(metar);
-    setPilotUserName(userName);
-  }, [fetchMetarData, fetchPilotUserName]);
+
+    if (flight.pilotUsername) {
+      const userName = await fetchPilotUserName(flight.pilotUsername);
+      setPilotUserName(userName);
+    }
+  };
 
   // Criação de ícone memoizada
   const createAirplaneIcon = useCallback((rotation) => 
@@ -261,17 +264,17 @@ function FlightMap() {
 
           {/* Sidebar */}
           {showSidebar && selectedFlight && (
-            <Sidebar
-              mapTheme={mapTheme}
-              flightData={selectedFlight}
-              metarData={metarData}
-              pilotUserName={pilotUserName}
-              onClose={() => {
-                setShowSidebar(false);
-                setSelectedFlight(null);
-              }}
-            />
-          )}
+  <Sidebar
+    flightData={selectedFlight}
+    metarData={metarData}
+    pilotUserName={pilotUserName}
+    onClose={() => {
+      setShowSidebar(false);
+      setSelectedFlight(null);
+    }}
+    mapTheme={mapTheme}
+  />
+)}
 
           {/* Status de atualização */}
           <div className="absolute bottom-4 left-4 z-20 bg-white dark:bg-gray-800 px-4 py-2 rounded-lg shadow-md">
