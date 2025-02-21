@@ -39,27 +39,27 @@ function Sidebar({ flightData, metarData, pilotUserName, onClose, mapTheme }) {
       </div>
 
       {/* Informações do Voo */}
-      <div className="compact-flight-info">
-        <h3 className="flight-callsign">{flightData.callsign}</h3>
+     <div className="compact-flight-info">
+  <h3 className="flight-callsign">{flightData.callsign}</h3>
 
-        <div className="info-grid">
-          <InfoCard label="Piloto" value={pilotUserName} highlight />
-          <InfoCard label="Rede" value={flightData.network || "N/A"} />  
-          <InfoCard label="Aeronave" value={flightData.aircraft} />
-          <InfoCard label="Partida" value={flightData.departureIdentifiers} />
-          <InfoCard label="Chegada" value={flightData.arrivalIdentifiers} />
-          <value={flightData.departure} />
-          <value={flightData.arrival} />
-          <InfoCard label="Altitude" value={`${flightData.altitude} ft`} />
-          <InfoCard label="Velocidade" value={`${flightData.speed} kts`} />
-          <InfoCard label="Fase" value={flightData.phase} />
-          <InfoCard label="Distância Total" value={`${flightData.routeDistance} NM`} />
-          <InfoCard label="Restante" value={`${flightData.distanceRemaining} NM`} />
-        </div>
+  <div className="info-grid">
+    <InfoCard label="Piloto" value={pilotUserName} highlight />
+    <InfoCard label="Rede" value={flightData.network || "N/A"} />  
+    <InfoCard label="Aeronave" value={flightData.aircraft} />
+    <InfoCard label="Partida" value={flightData.departureIdentifiers} />
+    <InfoCard label="Chegada" value={flightData.arrivalIdentifiers} />
+    {/* Removidos os cartões de partida e chegada */}
+    <InfoCard label="Altitude" value={`${flightData.altitude} ft`} />
+    <InfoCard label="Velocidade" value={`${flightData.speed} kts`} />
+    <InfoCard label="Fase" value={flightData.phase} />
+    <InfoCard label="Distância Total" value={`${flightData.routeDistance} NM`} />
+    <InfoCard label="Restante" value={`${flightData.distanceRemaining} NM`} />
+  </div>
 
-        {/* METAR Section */}
-        {metarData && <Metar metarData={metarData} airportCode={flightData.departure} airportCode={flightData.arrival} />}
-      </div>
+  {/* Seção METAR */}
+  {metarData && <Metar metarData={metarData} airportCode={flightData.departure} airportCode={flightData.arrival} />}
+</div>
+
     </div>
   );
 }
