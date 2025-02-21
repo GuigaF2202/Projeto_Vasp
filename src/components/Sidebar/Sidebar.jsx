@@ -46,8 +46,10 @@ function Sidebar({ flightData, metarData, pilotUserName, onClose, mapTheme }) {
           <InfoCard label="Piloto" value={pilotUserName} highlight />
           <InfoCard label="Rede" value={flightData.network || "N/A"} />  
           <InfoCard label="Aeronave" value={flightData.aircraft} />
-          <InfoCard label="Partida" value={flightData.departure} />
-          <InfoCard label="Chegada" value={flightData.arrival} />
+          <InfoCard label="Partida" value={flightData.departureIdentifiers} />
+          <InfoCard label="Chegada" value={flightData.arrivalIdentifiers} />
+          <InfoCard value={flightData.departure} />
+          <InfoCard value={flightData.arrival} />
           <InfoCard label="Altitude" value={`${flightData.altitude} ft`} />
           <InfoCard label="Velocidade" value={`${flightData.speed} kts`} />
           <InfoCard label="Fase" value={flightData.phase} />
@@ -56,7 +58,7 @@ function Sidebar({ flightData, metarData, pilotUserName, onClose, mapTheme }) {
         </div>
 
         {/* METAR Section */}
-        {metarData && <Metar metarData={metarData} airportCode={flightData.departure} />}
+        {metarData && <Metar metarData={metarData} airportCode={flightData.departure} airportCode={flightData.arrival} />}
       </div>
     </div>
   );
