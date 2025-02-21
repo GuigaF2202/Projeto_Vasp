@@ -48,8 +48,8 @@ function Sidebar({ flightData, metarData, pilotUserName, onClose, mapTheme }) {
           <InfoCard label="Aeronave" value={flightData.aircraft} />
           <InfoCard label="Partida" value={flightData.departureIdentifiers} />
           <InfoCard label="Chegada" value={flightData.arrivalIdentifiers} />
-          <InfoCard value={flightData.departure} />
-          <InfoCard value={flightData.arrival} />
+          <value={flightData.departure} />
+          <value={flightData.arrival} />
           <InfoCard label="Altitude" value={`${flightData.altitude} ft`} />
           <InfoCard label="Velocidade" value={`${flightData.speed} kts`} />
           <InfoCard label="Fase" value={flightData.phase} />
