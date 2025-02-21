@@ -73,6 +73,7 @@ function FlightMap() {
         aircraft: flight?.aircraft?.type || 'N/A',
         phase: flight?.progress?.currentPhase || 'N/A',
         network: flight?.booking?.network || 'N/A',
+        routeDistance: flight.progress.routeDistance,
         distanceRemaining: flight?.progress?.distanceRemaining || 0,
         pilotUsername: flight?.pilot?.username || 'N/A',
         timestamp: new Date().getTime(),
