@@ -48,7 +48,6 @@ function Sidebar({ flightData, metarData, pilotUserName, onClose, mapTheme }) {
     <InfoCard label="Aeronave" value={flightData.aircraft} />
     <InfoCard label="Partida" value={flightData.departureIdentifiers} />
     <InfoCard label="Chegada" value={flightData.arrivalIdentifiers} />
-    {/* Removidos os cartões de partida e chegada */}
     <InfoCard label="Altitude" value={`${flightData.altitude} ft`} />
     <InfoCard label="Velocidade" value={`${flightData.speed} kts`} />
     <InfoCard label="Fase" value={flightData.phase} />
@@ -56,10 +55,8 @@ function Sidebar({ flightData, metarData, pilotUserName, onClose, mapTheme }) {
     <InfoCard label="Restante" value={`${flightData.distanceRemaining} NM`} />
   </div>
 
-  {/* Seção METAR */}
   {metarData && <Metar metarData={metarData} airportCode={flightData.departure} airportCode={flightData.arrival} />}
 </div>
-
     </div>
   );
 }
