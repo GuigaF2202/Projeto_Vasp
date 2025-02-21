@@ -70,6 +70,8 @@ function FlightMap() {
         longitude: parseFloat(flight?.progress?.longitude) || 0,
         departure: flight?.departureAirport?.identifiers || 'N/A',
         arrival: flight?.arrivalAirport?.identifiers || 'N/A',
+        departure: flight?.departureAirport?.icao || 'N/A',
+        arrival: flight?.arrivalAirport?.icao || 'N/A',
         aircraft: flight?.aircraft?.type || 'N/A',
         phase: flight?.progress?.currentPhase || 'N/A',
         network: flight?.booking?.network || 'N/A',
