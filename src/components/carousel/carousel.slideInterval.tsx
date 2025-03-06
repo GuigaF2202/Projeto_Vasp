@@ -1,8 +1,11 @@
 import React from 'react';
 import { Carousel } from "flowbite-react";
 import { useLanguage } from "../../context/LanguageContext";
+import { useTheme } from "../../context/ThemeContext";
 import vatLogo from "../../assets/vat.png";
+import vatLogoDark from "../../assets/vat-dark.png";
 import sysLogo from "../../assets/sys.png";
+import sysLogoDark from "../../assets/sys-dark.png";
 import vaLogo from "../../assets/va-1.svg";
 import fallbackImage from "../../assets/fallback-image.jpg"; // Imagem de fallback importada
 
@@ -23,6 +26,7 @@ const translations = {
 
 const CarouselComponent = () => {
   const { language } = useLanguage();
+  const { theme } = useTheme();
   const t = translations[language as keyof typeof translations];
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -80,10 +84,10 @@ const CarouselComponent = () => {
               className="hover:scale-105 transition-transform duration-300"
             >
               <img 
-                src={vatLogo} 
+                src={theme === 'dark' ? vatLogo : vatLogoDark}
                 alt="Logo VAT" 
                 className="object-contain max-h-full"
-                onError={handleImageError} // Usando o método de fallback
+                onError={handleImageError}
               />
             </a>
           </div>
@@ -96,10 +100,10 @@ const CarouselComponent = () => {
               className="hover:scale-105 transition-transform duration-300"
             >
               <img 
-                src={sysLogo} 
+                src={theme === 'dark' ? sysLogo : sysLogoDark}
                 alt="Logo SYS" 
                 className="object-contain max-h-full"
-                onError={handleImageError} // Usando o método de fallback
+                onError={handleImageError}
               />
             </a>
           </div>
