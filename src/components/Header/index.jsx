@@ -35,7 +35,7 @@ function Header() {
             {menuItems.map((item, index) => (
               <Link
                 key={index}
-                to={item.href} // Usando Link para navegação
+                to={item.href}
                 className="text-gray-700 dark:text-gray-200 hover:text-secondary dark:hover:text-secondary px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 {item.label}
@@ -43,7 +43,7 @@ function Header() {
             ))}
           </nav>
 
-          {/* Alternadores de Tema e Idioma */}
+          {/* Botão Despacho e Ícones */}
           <div className="flex items-center space-x-4">
             <button
               onClick={toggleLanguage}
@@ -64,6 +64,15 @@ function Header() {
                 className="w-5 h-5"
               />
             </button>
+
+            <a
+              href="https://vamsys.io/phoenix/flight-center/book"
+              className="inline-block px-4 py-2 text-sm bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-200 ease-in-out transform hover:scale-105"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Despacho Operacional
+            </a>
           </div>
         </div>
       </div>
